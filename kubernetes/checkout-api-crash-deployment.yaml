@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: checkout-api-crash
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: checkout-api-crash
+
+  template:
+    metadata:
+      labels:
+        app: checkout-api-crash
+
+    spec:
+      containers:
+        - name: checkout-api
+          image: checkout-api:1.1
+          imagePullPolicy: IfNotPresent
+
+          command: ["python"]
+          args: ["app_crash.py"]
